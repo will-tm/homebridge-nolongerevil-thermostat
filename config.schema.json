@@ -1,0 +1,114 @@
+{
+  "pluginAlias": "NoLongerEvilThermostat",
+  "pluginType": "platform",
+  "singular": false,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "No Longer Evil Thermostat",
+        "required": true
+      },
+      "mqttBroker": {
+        "title": "MQTT Broker URL",
+        "type": "string",
+        "required": true,
+        "placeholder": "mqtt://192.168.1.100:1883",
+        "description": "MQTT broker URL (e.g., mqtt://localhost:1883 or mqtts://broker.example.com:8883)"
+      },
+      "mqttUsername": {
+        "title": "MQTT Username",
+        "type": "string",
+        "required": false,
+        "description": "Optional MQTT broker username"
+      },
+      "mqttPassword": {
+        "title": "MQTT Password",
+        "type": "string",
+        "required": false,
+        "description": "Optional MQTT broker password"
+      },
+      "mqttClientId": {
+        "title": "MQTT Client ID",
+        "type": "string",
+        "required": false,
+        "placeholder": "homebridge-thermostat",
+        "description": "Optional MQTT client ID (auto-generated if not specified)"
+      },
+      "topicPrefix": {
+        "title": "Topic Prefix",
+        "type": "string",
+        "default": "nest",
+        "required": false,
+        "description": "MQTT topic prefix used by your server (default: nest)"
+      },
+      "devices": {
+        "title": "Thermostats",
+        "type": "array",
+        "required": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "title": "Device Name",
+              "type": "string",
+              "required": true,
+              "placeholder": "Living Room Thermostat"
+            },
+            "serial": {
+              "title": "Device Serial Number",
+              "type": "string",
+              "required": true,
+              "placeholder": "02AA01AC",
+              "description": "8-character serial number of the thermostat"
+            },
+            "temperatureDisplayUnits": {
+              "title": "Temperature Display Units",
+              "type": "string",
+              "required": false,
+              "default": "CELSIUS",
+              "oneOf": [
+                {
+                  "title": "Celsius",
+                  "enum": ["CELSIUS"]
+                },
+                {
+                  "title": "Fahrenheit",
+                  "enum": ["FAHRENHEIT"]
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "layout": [
+    "name",
+    {
+      "type": "fieldset",
+      "title": "MQTT Configuration",
+      "expandable": true,
+      "expanded": false,
+      "items": [
+        "mqttBroker",
+        "mqttUsername",
+        "mqttPassword",
+        "mqttClientId",
+        "topicPrefix"
+      ]
+    },
+    {
+      "key": "devices",
+      "type": "array",
+      "title": "Thermostats",
+      "items": [
+        "devices[].name",
+        "devices[].serial",
+        "devices[].temperatureDisplayUnits"
+      ]
+    }
+  ]
+}

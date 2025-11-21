@@ -1,0 +1,30 @@
+{
+  "bridge": {
+    "name": "Homebridge",
+    "username": "CC:22:3D:E3:CE:30",
+    "port": 51826,
+    "pin": "031-45-154"
+  },
+  "platforms": [
+    {
+      "platform": "NoLongerEvilThermostat",
+      "name": "No Longer Evil Thermostat",
+      "mqttBroker": "mqtt://192.168.1.100:1883",
+      "mqttUsername": "homebridge",
+      "mqttPassword": "password123",
+      "topicPrefix": "nolongerevil",
+      "devices": [
+        {
+          "name": "Living Room Thermostat",
+          "serial": "02AA01AC",
+          "temperatureDisplayUnits": "CELSIUS"
+        },
+        {
+          "name": "Bedroom Thermostat",
+          "serial": "02BB02BD",
+          "temperatureDisplayUnits": "FAHRENHEIT"
+        }
+      ]
+    }
+  ]
+}
