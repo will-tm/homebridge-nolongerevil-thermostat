@@ -99,7 +99,7 @@ export class ThermostatAccessory {
 
   // Current Temperature Handlers
   handleCurrentTemperatureGet(): CharacteristicValue {
-    return this.state.currentTemperature || 20;
+    return this.state.currentTemperature ?? 20;
   }
 
   updateCurrentTemperature(value: number) {
@@ -113,7 +113,7 @@ export class ThermostatAccessory {
 
   // Target Temperature Handlers
   handleTargetTemperatureGet(): CharacteristicValue {
-    return this.state.targetTemperature || 20;
+    return this.state.targetTemperature ?? 20;
   }
 
   async handleTargetTemperatureSet(value: CharacteristicValue) {
@@ -139,7 +139,7 @@ export class ThermostatAccessory {
 
   // Cooling Threshold Temperature Handlers (for AUTO mode)
   handleCoolingThresholdTemperatureGet(): CharacteristicValue {
-    return this.state.targetTemperatureHigh || 24;
+    return this.state.targetTemperatureHigh ?? 24;
   }
 
   async handleCoolingThresholdTemperatureSet(value: CharacteristicValue) {
@@ -165,7 +165,7 @@ export class ThermostatAccessory {
 
   // Heating Threshold Temperature Handlers (for AUTO mode)
   handleHeatingThresholdTemperatureGet(): CharacteristicValue {
-    return this.state.targetTemperatureLow || 18;
+    return this.state.targetTemperatureLow ?? 18;
   }
 
   async handleHeatingThresholdTemperatureSet(value: CharacteristicValue) {

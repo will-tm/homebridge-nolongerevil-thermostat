@@ -1,7 +1,7 @@
 {
   "name": "homebridge-nolongerevil-thermostat",
   "displayName": "No Longer Evil Thermostat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HomeKit integration for No Longer Evil Thermostat via MQTT",
   "license": "MIT",
   "author": "will-tm",

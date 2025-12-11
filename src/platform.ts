@@ -99,11 +99,13 @@ export class NoLongerEvilThermostatPlatform implements DynamicPlatformPlugin {
       return;
     }
 
-    const topicPrefix = this.config.topicPrefix || 'nest';
+    const topicPrefix = this.config.topicPrefix || 'nolongerevil';
 
     for (const device of this.config.devices) {
       // Subscribe to all state topics for this device
+      // Note: current_temperature can be in either shared or device object
       const topics = [
+        `${topicPrefix}/${device.serial}/shared/current_temperature`,
         `${topicPrefix}/${device.serial}/device/current_temperature`,
         `${topicPrefix}/${device.serial}/shared/target_temperature`,
         `${topicPrefix}/${device.serial}/shared/target_temperature_low`,
@@ -127,7 +129,7 @@ export class NoLongerEvilThermostatPlatform implements DynamicPlatformPlugin {
   }
 
   private handleMessage(topic: string, payload: Buffer) {
-    const topicPrefix = this.config.topicPrefix || 'nest';
+    const topicPrefix = this.config.topicPrefix || 'nolongerevil';
     const topicParts = topic.split('/');
 
     // Parse topic: prefix/serial/objectType/field
@@ -164,7 +166,8 @@ export class NoLongerEvilThermostatPlatform implements DynamicPlatformPlugin {
     this.log.debug(`Received MQTT message: ${topic} = ${value}`);
 
     // Update accessory based on field
-    if (objectType === 'device' && field === 'current_temperature') {
+    // current_temperature can come from either shared or device object
+    if (field === 'current_temperature') {
       accessory.updateCurrentTemperature(value as number);
     } else if (objectType === 'shared' && field === 'target_temperature') {
       accessory.updateTargetTemperature(value as number);
@@ -190,7 +193,7 @@ export class NoLongerEvilThermostatPlatform implements DynamicPlatformPlugin {
       return;
     }
 
-    const topicPrefix = this.config.topicPrefix || 'nest';
+    const topicPrefix = this.config.topicPrefix || 'nolongerevil';
     const topic = `${topicPrefix}/${serial}/${objectType}/${field}/set`;
     const payload = typeof value === 'object' ? JSON.stringify(value) : String(value);
 
