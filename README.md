@@ -47,12 +47,12 @@ Add the following to your Homebridge `config.json`:
       "devices": [
         {
           "name": "Living Room Thermostat",
-          "serial": "02AA01AC",
+          "serial": "02AA01AC2DD45XEQ",
           "temperatureDisplayUnits": "CELSIUS"
         },
         {
           "name": "Bedroom Thermostat",
-          "serial": "02BB02BD",
+          "serial": "02BB02BDC0DEA87E",
           "temperatureDisplayUnits": "FAHRENHEIT"
         }
       ]
@@ -78,7 +78,7 @@ Add the following to your Homebridge `config.json`:
 | Parameter | Required | Default | Description |
 |-----------|----------|---------|-------------|
 | `name` | Yes | - | Display name in HomeKit |
-| `serial` | Yes | - | 8-character thermostat serial number |
+| `serial` | Yes | - | 16-character thermostat serial number |
 | `temperatureDisplayUnits` | No | `CELSIUS` | Temperature units: `CELSIUS` or `FAHRENHEIT` |
 
 ## HomeKit Features
@@ -184,3 +184,4 @@ npm run watch
 ```bash
 npm link
 ```
+
